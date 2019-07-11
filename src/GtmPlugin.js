@@ -70,4 +70,14 @@ export default class AnalyticsPlugin {
       })
     }
   }
+
+  set(key, value) {
+    if (inBrowser && pluginConfig.enabled) {
+      let dataLayer = (window.dataLayer = window.dataLayer || [])
+
+      if (typeof dataLayer.set === "function") {
+        dataLayer.set(key, value)
+      }
+    }
+  }
 }
